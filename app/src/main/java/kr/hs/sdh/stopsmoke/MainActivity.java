@@ -1,6 +1,10 @@
 package kr.hs.sdh.stopsmoke;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,23 +13,36 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 public class MainActivity extends AppCompatActivity {
+
     AutoScrollViewPager autoViewPager;
     private ListView mListView;
+
+    //DB
+    private DBhelper dbhelper;
+    private Cursor all_cursor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //DB생성
+        DBcreate();
+        //첫실행
+
         //이미지 슬라이드
         Imageslide();
         //리스트뷰
         dataSetting();
 
-
     }
+
+
 
     public void Imageslide(){
 
@@ -61,5 +78,34 @@ public class MainActivity extends AppCompatActivity {
         /* 리스트뷰에 어댑터 등록 */
         mListView.setAdapter(mMyAdapter);
     }//리스트뷰
+    public void DBcreate(){
+            dbhelper = new DBhelper(getApplication());
+            dbhelper.open();
+            all_cursor = dbhelper.AllRows();
+            all_cursor.moveToFirst();
+            SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
+            boolean first = pref.getBoolean("isFirst", false);
+            if (first == false) {
+                dbhelper.insertGarbage();
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("isFirst", true);
+                editor.commit();
+            }
+
+
+        }//DB생성
+    public void Intent(Class subclass){
+        Intent intent=new Intent(MainActivity.this,subclass);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dbhelper.close();
+    }
+
 
 }
+
