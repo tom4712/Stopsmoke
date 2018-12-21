@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-            Calendar todaCal = Calendar.getInstance(); //오늘날자 가져오기
+            Calendar todaCal = Calendar.getInstance(); //오늘날자 가져오기ㅁㄴㅇㅁㄴㅇㅁ
             Calendar ddayCal = Calendar.getInstance(); //오늘날자를 가져와 변경시킴
             Log.d("time","todaCal"+todaCal);
             Log.d("time","todaCal"+ddayCal);
