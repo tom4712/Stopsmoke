@@ -130,8 +130,13 @@ public class Fish extends AppCompatActivity {
         TextView message = (TextView) view.findViewById(R.id.message);
         message.setTextSize(25);
         txtTitle.setTextColor(Color.BLACK);
-        message.setText("날짜를 확인해주세요!");
-
+        mYear=0;
+        if(mYear==0){
+            message.setText("날짜를 선택해주십시오!");
+        }
+        else {
+            message.setText("날짜를 확인해주세요!");
+        }
         AlertDialog.Builder alt = new AlertDialog.Builder(context);
 
         alt.setView(view)
@@ -141,39 +146,22 @@ public class Fish extends AppCompatActivity {
         alert.setCanceledOnTouchOutside(true);
         alert.getWindow().setBackgroundDrawable(new ColorDrawable(argb(255,255,116,115)));
 
+        mYear=0;
         alert.show();
     }
     public void onClick(View view) {
 
         if(mYear!=0){
 
-            Intent intent=new Intent(Fish.this,How.class);
+            Intent intent=new Intent(Fish.this,Four.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_left);
+            finish();
 
         }
         else{
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                    context);
 
-            // 제목셋팅
-            alertDialogBuilder.setTitle("경고!");
-
-            // AlertDialog 셋팅
-            alertDialogBuilder
-                    .setMessage("목표 날짜를 선택해주세요")
-                    .setCancelable(false);
-
-
-            // 다이얼로그 생성
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.setCanceledOnTouchOutside(true);
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(255,255,116,115)));
-            // 다이얼로그 보여주기
-            alertDialog.show();
-
-
-
-
+            show();
 
 
         }
