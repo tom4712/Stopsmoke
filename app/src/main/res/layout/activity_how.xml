@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFF7473"
+    tools:context=".sampledata.How">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="하루에 몇갑이나 피시나요?"
+        android:textColor="#ffffff"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:textSize="40dp"
+
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_height="380dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:text="3갑 이상"
+
+        android:onClick="onCLick"
+        android:id="@+id/Threepacks"
+        android:background="#a0ffffff"
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:layout_height="55dp"  />
+    <Button
+        android:layout_width="match_parent"
+        android:text="2갑 이상"
+        android:onClick="onCLick"
+        android:id="@+id/Twopacks"
+        android:background="#a0ffffff"
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:textSize="20dp"
+        android:layout_height="55dp"  />
+    <Button
+        android:layout_width="match_parent"
+        android:text="1갑 이상"
+        android:onClick="onCLick"
+        android:id="@+id/Onepacks"
+        android:background="#a0ffffff"
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:textSize="20dp"
+        android:layout_height="55dp" />
+    <Button
+        android:layout_width="match_parent"
+        android:text="20개피 이상"
+        android:background="#a0ffffff"
+        android:onClick="onCLick"
+        android:id="@+id/twenty_bar"
+        android:layout_margin="10dp"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:layout_height="55dp"  />
+    <Button
+        android:layout_width="match_parent"
+        android:text="10개피 이상"
+        android:background="#a0ffffff"
+        android:layout_margin="10dp"
+        android:onClick="onCLick"
+        android:id="@+id/Ten_bar"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:textSize="20dp"
+        android:layout_height="55dp" />
+
+</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:text="다음"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:background="#d8ffffff"
+        android:id="@+id/next"
+        android:onClick="onClick"
+        android:textSize="25dp"
+        android:layout_marginRight="12dp"
+        android:layout_gravity="right"
+        android:layout_height="wrap_content" />
+</LinearLayout>
