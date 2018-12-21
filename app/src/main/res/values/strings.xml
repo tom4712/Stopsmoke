@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Stopsmoke!</string>
+    <string name="appwidget_text">금연 후로부터</string>
+    <string name="add_widget">위젯추가하기</string>
 </resources>

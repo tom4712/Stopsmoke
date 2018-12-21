@@ -24,6 +24,7 @@ import kr.hs.sdh.stopsmoke.R;
 import static android.graphics.Color.argb;
 
 public class Fish extends AppCompatActivity {
+    String nnn = "";
     CalendarView calendar;
     final Context context = this;
     View view;
@@ -75,13 +76,12 @@ public class Fish extends AppCompatActivity {
 
                     if(yyyy==mYear){
                         if(Mmonth<mMonth){
-                            String nnn=""+mYear+mMonth+mDay;
-                            Log.d("nnn",""+nnn);
-//여기다 씨발 여기다가 디비 하면됌개새끼야
+                            nnn=""+mYear+mMonth+mDay;
                         }
 
                         else if(Mmonth==mMonth){
                             if(day<mDay){
+                                nnn=""+mYear+mMonth+mDay;
 //여기다 씨발 여기다가 디비 하면됌개새끼야
                             }
                             else{
@@ -96,13 +96,15 @@ public class Fish extends AppCompatActivity {
                     }
                 Toast.makeText(Fish.this,"개꾸울",Toast.LENGTH_SHORT).show();
 
+                    if(yyyy<mYear){
+                        nnn=""+mYear+mMonth+mDay;
+
+                    }
                 }
                 else{
-                    String nnn=""+mYear+mMonth+mDay;
+                    nnn=""+mYear+mMonth+mDay;
                     Log.d("nnn",""+nnn);
-                    //여기다 씨발 여기다가 디비 하면됌개새끼야
-                    //여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야
-                    //여기다 씨발 여기다가 디비 하면됌개새끼야
+
 
 
 
@@ -146,9 +148,8 @@ public class Fish extends AppCompatActivity {
     public void onClick(View view) {
 
         if(mYear!=0){
+            insert();
 
-            Intent intent=new Intent(Fish.this,How.class);
-            startActivity(intent);
 
         }
         else{
@@ -175,8 +176,12 @@ public class Fish extends AppCompatActivity {
 
 
 
-
         }
     }
-
+    public void insert(){
+        dbhelper = new DBhelper(getApplication());
+        dbhelper.open();
+        Log.d("nnn","aaaa"+nnn);
+        dbhelper.updateedate(nnn);
+    }
 }

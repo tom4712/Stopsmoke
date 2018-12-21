@@ -15,7 +15,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,6 +30,8 @@ import kr.hs.sdh.stopsmoke.sampledata.Start;
 public class MainActivity extends AppCompatActivity {
     //버튼
     ImageButton mainplus;
+    //텍스트뷰
+    TextView sdate , nextdate, afterdate;
 
     //레이아웃
     AutoScrollViewPager autoViewPager;
@@ -36,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     private Cursor all_cursor;
     int num = 40;
     private ArrayList<String> list = new ArrayList(num);
+
+
+    int y;
+    int m;
+    int d;
 
 
     @Override
@@ -53,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
         //DB검색
         Cursul();
         //첫실행 확인
-        //checkfirst();
+//        checkfirst();
         //이미지 슬라이드
         Imageslide();
         //리스트뷰
         dataSetting();
-
+        //텍스트 지정
+        loadtext();
     }
 
 
@@ -137,13 +149,55 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }//DB검색
-//    public void checkfirst(){
-//        if(Integer.parseInt(list.get(1)) != 1){
-//            Intent intent=new Intent(MainActivity.this,Start.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
+    public void checkfirst(){
+        if(Integer.parseInt(list.get(1)) != 1){
+            Intent intent=new Intent(MainActivity.this,Start.class);
+            startActivity(intent);
+            finish();
+        }
+    }//첫실행
+    public void loadtext(){
+        Cursul();
+        sdate = findViewById(R.id.sdate);
+
+        sdate.setText(list.get(0).substring(0,4)+"년"+list.get(0).substring(4,6)+"월"+list.get(0).substring(6)+"일 부터~");
+        y = Integer.parseInt(list.get(0).substring(0,4));
+        m = Integer.parseInt(list.get(0).substring(4,6));
+        try {
+            d = Integer.parseInt(list.get(0).substring(6, 7));
+        }catch (Exception e){
+            d = Integer.parseInt(list.get(0).substring(6));
+        }
+        countdday(y,m,d);
+    }
+
+    public int countdday(int year, int mmonth, int mday) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar todaCal = Calendar.getInstance(); //오늘날자 가져오기
+            Calendar ddayCal = Calendar.getInstance(); //오늘날자를 가져와 변경시킴
+            Log.d("time","todaCal"+todaCal);
+            Log.d("time","todaCal"+ddayCal);
+
+//            mmonth -= 1; // 받아온날자에서 -1을 해줘야함.
+
+            ddayCal.set(year, mmonth, mday);// D-day의 날짜를 입력
+            Log.e("테스트", simpleDateFormat.format(todaCal.getTime()) + "");
+            Log.e("테스트", simpleDateFormat.format(ddayCal.getTime()) + "");
+
+            long today = todaCal.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
+            long dday = ddayCal.getTimeInMillis() / 86400000;
+            long count = dday - today; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
+            num = (int) count * -1;
+            Log.d("테스트","씨이ㅇ이이이발"+num);
+
+            return (int) count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     @Override
     protected void onStop() {
         super.onStop();

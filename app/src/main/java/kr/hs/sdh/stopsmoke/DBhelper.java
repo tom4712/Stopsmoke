@@ -73,17 +73,18 @@ public class DBhelper {
     }
 
     public void updatesdate(String sum){
-        insertStmt = mDb.compileStatement("UPDATE first_table SET ONOFF  = ?");
+        insertStmt = mDb.compileStatement("UPDATE first_table SET SDATE  = ?");
         insertStmt.clearBindings();
-        insertStmt.bindString(1,String.valueOf(sum));
+        insertStmt.bindString(1,sum);
         insertStmt.execute();
     }
 
-    public void updaleon(String sum){
-        insertStmt = mDb.compileStatement("UPDATE first_table SET ONOFF  = ?");
+    public void updateedate(String sum){
+        insertStmt = mDb.compileStatement("UPDATE first_table SET ENDDATE = ?");
         insertStmt.clearBindings();
-        insertStmt.bindString(1,String.valueOf(sum));
+        insertStmt.bindString(1,sum);
         insertStmt.execute();
+        Log.d("db","값넣음"+sum);
     }
 
     public Cursor AllRows() {

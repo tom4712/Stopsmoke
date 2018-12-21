@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ffffff"
+    android:orientation="horizontal"
+    android:padding="@dimen/widget_margin">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/round"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:id="@+id/appwidget_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:text="금연 시작한지"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/widgettext"
+        android:gravity="center"
+        android:textSize="35dp"
+        android:text="30"
+        android:textStyle="normal"
+        android:fontFamily="@font/my_font_family"
+        android:textColor="#ffffff"
+        android:background="@drawable/round2"
+        android:layout_weight="1.4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

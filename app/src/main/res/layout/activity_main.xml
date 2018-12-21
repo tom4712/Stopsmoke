@@ -60,6 +60,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/sdate"
             android:gravity="center"
             android:textColor="#ffffff"
             android:text="2018-12-08 화요일 ~"
