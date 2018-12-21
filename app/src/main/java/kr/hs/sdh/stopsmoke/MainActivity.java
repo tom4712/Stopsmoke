@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
+import kr.hs.sdh.stopsmoke.sampledata.Start;
 
 public class MainActivity extends AppCompatActivity {
     //버튼
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         //버튼 아이디 지정
@@ -49,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
         //DB검색
         Cursul();
         //첫실행 확인
-
+        //checkfirst();
         //이미지 슬라이드
         Imageslide();
         //리스트뷰
         dataSetting();
 
     }
+
 
 
 
@@ -132,16 +137,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }//DB검색
-    public void checkfirst(){
-        if(Integer.parseInt(list.get(1)) != 1){
-        }
-    }
-    public void Intent(Class subclass){
-        Intent intent=new Intent(MainActivity.this,subclass);
-        startActivity(intent);
-        finish();
-    }
-
+//    public void checkfirst(){
+//        if(Integer.parseInt(list.get(1)) != 1){
+//            Intent intent=new Intent(MainActivity.this,Start.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
     @Override
     protected void onStop() {
         super.onStop();
