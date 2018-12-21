@@ -29,7 +29,6 @@
     <Button
         android:layout_width="match_parent"
         android:text="3갑 이상"
-
         android:onClick="onCLick"
         android:id="@+id/Threepacks"
         android:background="#a0ffffff"
@@ -62,7 +61,7 @@
         android:layout_height="55dp" />
     <Button
         android:layout_width="match_parent"
-        android:text="20개피 이상"
+        android:text="10개피 이상"
         android:background="#a0ffffff"
         android:onClick="onCLick"
         android:id="@+id/twenty_bar"
@@ -73,7 +72,7 @@
         android:layout_height="55dp"  />
     <Button
         android:layout_width="match_parent"
-        android:text="10개피 이상"
+        android:text="10개피 이하"
         android:background="#a0ffffff"
         android:layout_margin="10dp"
         android:onClick="onCLick"

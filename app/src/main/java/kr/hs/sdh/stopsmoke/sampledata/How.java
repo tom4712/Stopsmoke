@@ -14,5 +14,7 @@ public class How extends AppCompatActivity {
         setContentView(R.layout.activity_how);
     }
     public void onCLick(View view) {
+
+
     }
 }

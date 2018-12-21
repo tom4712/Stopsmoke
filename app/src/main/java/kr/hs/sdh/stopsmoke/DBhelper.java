@@ -72,6 +72,20 @@ public class DBhelper {
         insertStmt.execute();
     }
 
+    public void updatesdate(String sum){
+        insertStmt = mDb.compileStatement("UPDATE first_table SET ONOFF  = ?");
+        insertStmt.clearBindings();
+        insertStmt.bindString(1,String.valueOf(sum));
+        insertStmt.execute();
+    }
+
+    public void updaleon(String sum){
+        insertStmt = mDb.compileStatement("UPDATE first_table SET ONOFF  = ?");
+        insertStmt.clearBindings();
+        insertStmt.bindString(1,String.valueOf(sum));
+        insertStmt.execute();
+    }
+
     public Cursor AllRows() {
         return mDb.query(DATABASE_TABLE, null, null, null, null, null, null);
     }//커서허용
