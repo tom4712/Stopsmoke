@@ -24,7 +24,7 @@ public class DBhelper {
     private SQLiteStatement insertStmt;
 
     private static final String DATABASE_CREATE="CREATE TABLE " +DATABASE_TABLE+ "" +
-            " (    ID    INTEGER PRIMARY    KEY AUTOINCREMENT,    DATE TEXT,    ONOFF  TEXT)";
+            " (    ID    INTEGER PRIMARY    KEY AUTOINCREMENT,    SDATE TEXT,    ONOFF  TEXT, ENDDATE TEXT)";
 
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
@@ -47,36 +47,36 @@ public class DBhelper {
     }
 
     public void insertGarbage(){
-        mDb.execSQL("INSERT INTO first_table VALUES(0,0,0);");
-    }
+        mDb.execSQL("INSERT INTO first_table VALUES(0,0,0,0);");
+    } //첫실행 쓰레기값
 
     public void open() throws SQLException {
 
         mDbHelper = new DatabaseHelper(mCtx);
 
         mDb = mDbHelper.getWritableDatabase();
-    }
+    }//디비오픈
 
     public DBhelper(Context ctx) {
         this.mCtx = ctx;
-    }
+    }//컨텍스트
 
     public void close() {
         mDbHelper.close();
-    }
+    }//디비종료
 
-    public void updateSex(int Sex){
-        insertStmt = mDb.compileStatement("UPDATE first_table SET SEX  = ?");
+    public void updateon(int sum){
+        insertStmt = mDb.compileStatement("UPDATE first_table SET ONOFF  = ?");
         insertStmt.clearBindings();
-        insertStmt.bindLong(1,Sex);
+        insertStmt.bindString(1,String.valueOf(sum));
         insertStmt.execute();
     }
 
     public Cursor AllRows() {
         return mDb.query(DATABASE_TABLE, null, null, null, null, null, null);
-    }
+    }//커서허용
     public boolean deleteAll() {
         return mDb.delete(DATABASE_TABLE, null, null) > 0;
-    }
+    }//값초기화
 
 }

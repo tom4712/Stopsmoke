@@ -8,8 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,21 +22,33 @@ import java.util.Date;
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 
 public class MainActivity extends AppCompatActivity {
+    //버튼
+    ImageButton mainplus;
 
+    //레이아웃
     AutoScrollViewPager autoViewPager;
     private ListView mListView;
 
     //DB
     private DBhelper dbhelper;
     private Cursor all_cursor;
+    int num = 40;
+    private ArrayList<String> list = new ArrayList(num);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //버튼 아이디 지정
+        mainplus = findViewById(R.id.mainplus);
+
         //DB생성
         DBcreate();
-        //첫실행
+        //DB검색
+        Cursul();
+        //첫실행 확인
 
         //이미지 슬라이드
         Imageslide();
@@ -79,21 +94,48 @@ public class MainActivity extends AppCompatActivity {
         mListView.setAdapter(mMyAdapter);
     }//리스트뷰
     public void DBcreate(){
-            dbhelper = new DBhelper(getApplication());
-            dbhelper.open();
-            all_cursor = dbhelper.AllRows();
-            all_cursor.moveToFirst();
+            dbhelper = new DBhelper(getApplication());              Log.d("DB", "헬퍼불러옴");
+        dbhelper.open();                                             Log.d("DB", "디비오픈");
+        all_cursor = dbhelper.AllRows();                              Log.d("DB", "커서 열음");
+        all_cursor.moveToFirst();                                           Log.d("DB", "처음으로감");
             SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
-            boolean first = pref.getBoolean("isFirst", false);
+            boolean first = pref.getBoolean("isFirst", false);    Log.d("DB", "처음인지 확인");
             if (first == false) {
+                Log.d("DB", "처음임");
                 dbhelper.insertGarbage();
+                Log.d("DB", "쓰레기값넣음");
+
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putBoolean("isFirst", true);
                 editor.commit();
             }
-
-
         }//DB생성
+    public void Cursul() {
+        list.clear();
+        dbhelper = new DBhelper(this);
+        dbhelper.open();
+        all_cursor = dbhelper.AllRows();
+        all_cursor.moveToFirst();
+        while (true) {
+            try {
+                list.add(all_cursor.getString(all_cursor.getColumnIndex("SDATE")));
+                Log.d("DB", "시작날자 받아옴"+list.get(0));
+                list.add(all_cursor.getString(all_cursor.getColumnIndex("ONOFF")));
+                Log.d("DB", "실행여부 받아옴"+list.get(1));
+                list.add(all_cursor.getString(all_cursor.getColumnIndex("ENDDATE")));
+                Log.d("DB", "목표날자 받아옴"+list.get(2));
+                if (!all_cursor.moveToNext())
+                    break;
+            } catch (Exception e) {
+
+            }
+
+        }
+    }//DB검색
+    public void checkfirst(){
+        if(Integer.parseInt(list.get(1)) != 1){
+        }
+    }
     public void Intent(Class subclass){
         Intent intent=new Intent(MainActivity.this,subclass);
         startActivity(intent);
@@ -104,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         dbhelper.close();
-    }
+    } //앱종료
 
 
 }
