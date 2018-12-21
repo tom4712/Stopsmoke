@@ -12,7 +12,7 @@
         android:background="#ff7473"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.28">
+        android:layout_weight="1.29">
 
 
         <ImageButton
@@ -41,7 +41,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.95">
+        android:layout_weight="0.97">
 
         <cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager
             android:id="@+id/autoViewPager"
