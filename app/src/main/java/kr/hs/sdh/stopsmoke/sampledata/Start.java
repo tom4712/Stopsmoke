@@ -27,16 +27,14 @@ import static android.graphics.Color.*;
 import static android.graphics.Color.WHITE;
 
 public class Start extends AppCompatActivity {
-    String numStr = "1";
-    String nnn = "1";
     CalendarView calendar;
     final Context context = this;
     View view;
     int mYear;
     long now = System.currentTimeMillis();
 
-    public DBhelper dbhelper;
-    public Cursor all_cursor;
+    private DBhelper dbhelper;
+    private Cursor all_cursor;
     int num = 40;
     private ArrayList<String> list = new ArrayList(num);
 
@@ -63,7 +61,6 @@ public class Start extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         calendar = (CalendarView)findViewById(R.id.calenda);
 
-
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -79,7 +76,10 @@ public class Start extends AppCompatActivity {
 
                     if(Mmonth==mMonth){
                         if(day>=mDay){
-                            nnn=""+mYear+mMonth+mDay;
+                            String nnn=""+mYear+mMonth+mDay;
+                            Log.d("nnn",""+nnn);
+//                          dbhelper.updatesdate(nnn);
+                            //여기다 씨발 여기다가 디비 하면됌개새끼야
                         }
                         else{
 //                            Toast.makeText(Start.this, "데이데이", Toast.LENGTH_SHORT).show();
@@ -90,8 +90,10 @@ public class Start extends AppCompatActivity {
                     }
 
                     else{
-
-                }
+                        String numStr = String.valueOf(mYear+mMonth+mDay);
+                        dbhelper.updatesdate(numStr);
+                        //여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야
+                    }
                 }
 
                 else{
@@ -127,18 +129,14 @@ public class Start extends AppCompatActivity {
             alert.setCanceledOnTouchOutside(true);
             alert.getWindow().setBackgroundDrawable(new ColorDrawable(argb(255,255,116,115)));
 
-            mYear=0;
             alert.show();
         }
     public void onClick(View view) {
 
         if(mYear!=0){
 
-            Log.d("nnn",""+nnn);
-            insert();
             Intent intent=new Intent(Start.this,Fish.class);
             startActivity(intent);
-            finish();
 
 
         }
@@ -169,11 +167,4 @@ public class Start extends AppCompatActivity {
 
         }
     }
-
-    public void insert(){
-        dbhelper = new DBhelper(getApplication());
-        dbhelper.open();
-        dbhelper.updatesdate(nnn);
-    }
-
 }
