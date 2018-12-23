@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> list = new ArrayList(num);
 
 
-    int y;
-    int m;
-    int d;
+    int y,y2;
+    int m,m2;
+    int d,d2;
 
 
     @Override
@@ -64,13 +64,16 @@ public class MainActivity extends AppCompatActivity {
         //DB검색
         Cursul();
         //첫실행 확인
-//        checkfirst();
+        checkfirst();
         //이미지 슬라이드
         Imageslide();
         //리스트뷰
         dataSetting();
         //텍스트 지정
-        loadtext();
+        if(Integer.parseInt(list.get(1)) == 1) {
+            loadtext();
+        }
+        //
     }
 
 
@@ -141,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("DB", "실행여부 받아옴"+list.get(1));
                 list.add(all_cursor.getString(all_cursor.getColumnIndex("ENDDATE")));
                 Log.d("DB", "목표날자 받아옴"+list.get(2));
+                list.add(all_cursor.getString(all_cursor.getColumnIndex("MANY")));
+                Log.d("DB", "몇개 받아옴"+list.get(3));
                 if (!all_cursor.moveToNext())
                     break;
             } catch (Exception e) {
@@ -150,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }//DB검색
     public void checkfirst(){
-        if(Integer.parseInt(list.get(1)) != 1){
+        if(Integer.parseInt(list.get(1)) == 0){
             Intent intent=new Intent(MainActivity.this,Start.class);
             startActivity(intent);
             finish();
@@ -159,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     public void loadtext(){
         Cursul();
         sdate = findViewById(R.id.sdate);
-
+        Log.d("DB",""+list.get(0).substring(0,4)+"[]"+list.get(0).substring(4,6)+"[]"+list.get(0).substring(6));
         sdate.setText(list.get(0).substring(0,4)+"년"+list.get(0).substring(4,6)+"월"+list.get(0).substring(6)+"일 부터~");
         y = Integer.parseInt(list.get(0).substring(0,4));
         m = Integer.parseInt(list.get(0).substring(4,6));
@@ -168,9 +173,25 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             d = Integer.parseInt(list.get(0).substring(6));
         }
-        countdday(y,m,d);
-    }
 
+        y2 = Integer.parseInt(list.get(2).substring(0,4));
+        m2 = Integer.parseInt(list.get(2).substring(4,6));
+        try {
+            d2 = Integer.parseInt(list.get(2).substring(6, 7));
+        }catch (Exception e){
+            d2 = Integer.parseInt(list.get(2).substring(6));
+        }
+
+        int a = countdday(y,m,d);
+        int b = countdday2(y,m,d,y2,m2,d2);
+
+        afterdate = findViewById(R.id.futuer);
+        nextdate = findViewById(R.id.paste);
+        nextdate.setText(""+a);//남은 날자
+        afterdate.setText(""+(a-b));//경과날자
+
+        Log.d("db","남은날"+a);
+    }
     public int countdday(int year, int mmonth, int mday) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -197,7 +218,35 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             return -1;
         }
-    }
+    }//남은날자
+
+    public int countdday2(int year, int mmonth, int mday, int year2, int mmonth2, int mday2) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar todaCal = Calendar.getInstance(); //시작날자 가져오기ㅁㄴㅇㅁㄴㅇㅁ
+            Calendar ddayCal = Calendar.getInstance(); //오늘날자를 가져와 변경시킴
+            Log.d("time","todaCal"+todaCal);
+            Log.d("time","todaCal"+ddayCal);
+
+            todaCal.set(year2, mmonth2, mday2);
+            ddayCal.set(year, mmonth, mday);// D-day의 날짜를 입력
+            Log.e("테스트", simpleDateFormat.format(todaCal.getTime()) + "");
+            Log.e("테스트", simpleDateFormat.format(ddayCal.getTime()) + "");
+
+            long today = todaCal.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
+            long dday = ddayCal.getTimeInMillis() / 86400000;
+            long count = dday - today; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
+            num = (int) count * -1;
+            Log.d("테스트2","씨이ㅇ이이이발"+num);
+
+            return (int) count ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }//전체 날자
+
     @Override
     protected void onStop() {
         super.onStop();

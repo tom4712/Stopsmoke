@@ -102,6 +102,7 @@
                 android:padding="3dp">
 
             <TextView
+                android:id="@+id/paste"
                 android:gravity="center"
                 android:text="30"
                 android:textSize="30dp"
@@ -135,6 +136,7 @@
                 android:padding="3dp">
 
                 <TextView
+                    android:id="@+id/futuer"
                     android:gravity="center"
                     android:text="335"
                     android:textSize="35dp"

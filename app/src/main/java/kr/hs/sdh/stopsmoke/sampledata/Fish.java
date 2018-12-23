@@ -29,6 +29,7 @@ public class Fish extends AppCompatActivity {
     View view;
     int mYear;
     long now = System.currentTimeMillis();
+    String nnn;
 
     private DBhelper dbhelper;
     private Cursor all_cursor;
@@ -60,6 +61,9 @@ public class Fish extends AppCompatActivity {
         setContentView(R.layout.activity_fish);
         calendar = (CalendarView)findViewById(R.id.calenda);
 
+        dbhelper = new DBhelper(this);
+        dbhelper.open();
+
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -69,53 +73,50 @@ public class Fish extends AppCompatActivity {
                 mDay=dayOfMonth;
 
                 Toast.makeText(Fish.this, year+"/"+(month+1)+"/"+dayOfMonth, Toast.LENGTH_SHORT).show();
-                Toast.makeText(Fish.this, ""+mMonth, Toast.LENGTH_SHORT).show();
-
-                if(yyyy<=mYear) {
-
-                    if(yyyy==mYear){
-                        if(Mmonth<mMonth){
-                            String nnn=""+mYear+mMonth+mDay;
-                            Log.d("nnn",""+nnn);
-//여기다 씨발 여기다가 디비 하면됌개새끼야
-                        }
-
-                        else if(Mmonth==mMonth){
-                            if(day<mDay){
-//여기다 씨발 여기다가 디비 하면됌개새끼야
-                            }
-                            else{
-                                show();
-                            }
-                        }
 
 
-                        else{
-                        show();
-                        }
-                    }
-                Toast.makeText(Fish.this,"개꾸울",Toast.LENGTH_SHORT).show();
-
-                }
-                else{
-                    String nnn=""+mYear+mMonth+mDay;
-                    Log.d("nnn",""+nnn);
-                    //여기다 씨발 여기다가 디비 하면됌개새끼야
-                    //여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야
-                    //여기다 씨발 여기다가 디비 하면됌개새끼야
-
-
-
-
-
-                    Toast.makeText(Fish.this,"먼지모름",Toast.LENGTH_SHORT).show();
-                }
-
-
+//                if(yyyy<=mYear) {
+//
+//                    if(yyyy==mYear){
+//                        if(Mmonth<mMonth){
+//                            nnn=""+mYear+mMonth+mDay;
+//                            Log.d("nnn",""+nnn);
+//                            dbhelper.updatesdate(nnn);
+//                        }
+//
+//                        else if(Mmonth==mMonth){
+//                            if(day<mDay){
+//                                dbhelper.updatesdate(nnn);
+//                            }
+//                            else{
+//                                show();
+//                            }
+//                        }
+//
+//
+//                        else{
+//                            show();
+//                        }
+//                    }
+//                    Toast.makeText(Fish.this,"개꾸울",Toast.LENGTH_SHORT).show();
+//
+//                }
+//                else{
+//                    nnn=""+mYear+mMonth+mDay;
+//                    Log.d("nnn",""+nnn);
+//                    dbhelper.updatesdate(nnn);
+//
+//                    Toast.makeText(Fish.this,"먼지모름",Toast.LENGTH_SHORT).show();
+//                }
+                nnn=""+mYear+mMonth+mDay;
+                dbhelper.updateedate(nnn);
+                Log.d("nnn",""+nnn);
 
             }
 
         });
+
+
 
 
     }
@@ -147,8 +148,9 @@ public class Fish extends AppCompatActivity {
 
         if(mYear!=0){
 
-            Intent intent=new Intent(Fish.this,How.class);
+            Intent intent=new Intent(Fish.this,Four.class);
             startActivity(intent);
+            finish();
 
         }
         else{

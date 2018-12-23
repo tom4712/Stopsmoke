@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import kr.hs.sdh.stopsmoke.DBhelper;
 import kr.hs.sdh.stopsmoke.MainActivity;
 import kr.hs.sdh.stopsmoke.R;
 
@@ -18,6 +19,9 @@ public class Four extends AppCompatActivity {
     Button Threepacks,Twopacks,Onepacks,twenty_bar,Ten_bar;
     int town=0;
     Context context = this;
+    private DBhelper dbhelper;
+    String sum = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,9 @@ public class Four extends AppCompatActivity {
         Onepacks=findViewById(R.id.Onepacks);
         twenty_bar=findViewById(R.id.twenty_bar);
         Ten_bar=findViewById(R.id.Ten_bar);
+
+        dbhelper = new DBhelper(this);
+        dbhelper.open();
     }
 
     public void onCLick(View view) {
@@ -57,7 +64,8 @@ public class Four extends AppCompatActivity {
                 }
                 pash(town);
 
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(),Loading.class);
+                intent.putExtra("index",sum);
                 startActivity(intent);
                 overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_left);
                 finish();
@@ -94,21 +102,29 @@ public void show(){
 
     switch (num){
         case 1:
-
+            sum = "13500";
             //13500
 
             break;
         case 2:
             //9000
+            sum = "9000";
+
             break;
         case 3:
             //4500
+            sum = "4500";
+
             break;
         case 4:
             //2500
+            sum = "2500";
+
             break;
         case 5:
             //1500
+            sum = "1500";
+
             break;
     }
     }
@@ -166,4 +182,8 @@ public void show(){
 
 
     }
+    public void update(){
+        dbhelper.updateon(1);
+    }
+
 }

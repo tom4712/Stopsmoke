@@ -24,7 +24,7 @@ public class DBhelper {
     private SQLiteStatement insertStmt;
 
     private static final String DATABASE_CREATE="CREATE TABLE " +DATABASE_TABLE+ "" +
-            " (    ID    INTEGER PRIMARY    KEY AUTOINCREMENT,    SDATE TEXT,    ONOFF  TEXT, ENDDATE TEXT)";
+            " (    ID    INTEGER PRIMARY    KEY AUTOINCREMENT,    SDATE TEXT,    ONOFF  TEXT, ENDDATE TEXT, MANY TEXT)";
 
 
     public static class DatabaseHelper extends SQLiteOpenHelper {
@@ -47,7 +47,7 @@ public class DBhelper {
     }
 
     public void insertGarbage(){
-        mDb.execSQL("INSERT INTO first_table VALUES(0,0,0,0);");
+        mDb.execSQL("INSERT INTO first_table VALUES(0,0,0,0,0);");
     } //첫실행 쓰레기값
 
     public void open() throws SQLException {
@@ -81,6 +81,14 @@ public class DBhelper {
 
     public void updateedate(String sum){
         insertStmt = mDb.compileStatement("UPDATE first_table SET ENDDATE = ?");
+        insertStmt.clearBindings();
+        insertStmt.bindString(1,sum);
+        insertStmt.execute();
+        Log.d("db","값넣음"+sum);
+    }
+
+    public void updatemany(String sum){
+        insertStmt = mDb.compileStatement("UPDATE first_table SET MANY = ?");
         insertStmt.clearBindings();
         insertStmt.bindString(1,sum);
         insertStmt.execute();

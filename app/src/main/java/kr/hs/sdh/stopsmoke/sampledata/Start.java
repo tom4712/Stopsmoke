@@ -54,12 +54,15 @@ public class Start extends AppCompatActivity {
     String getY=sdf3.format(date);
     int yyyy = Integer.parseInt(getY);
 
+
     int mMonth,mDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         calendar = (CalendarView)findViewById(R.id.calenda);
+        dbhelper = new DBhelper(this);
+        dbhelper.open();
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -78,8 +81,7 @@ public class Start extends AppCompatActivity {
                         if(day>=mDay){
                             String nnn=""+mYear+mMonth+mDay;
                             Log.d("nnn",""+nnn);
-//                          dbhelper.updatesdate(nnn);
-                            //여기다 씨발 여기다가 디비 하면됌개새끼야
+                             dbhelper.updatesdate(nnn);
                         }
                         else{
 //                            Toast.makeText(Start.this, "데이데이", Toast.LENGTH_SHORT).show();
@@ -92,7 +94,6 @@ public class Start extends AppCompatActivity {
                     else{
                         String numStr = String.valueOf(mYear+mMonth+mDay);
                         dbhelper.updatesdate(numStr);
-                        //여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야//여기다 씨발 여기다가 디비 하면됌개새끼야
                     }
                 }
 
@@ -105,6 +106,8 @@ public class Start extends AppCompatActivity {
             }
 
         });
+
+
     }
 
 
@@ -137,6 +140,7 @@ public class Start extends AppCompatActivity {
 
             Intent intent=new Intent(Start.this,Fish.class);
             startActivity(intent);
+            finish();
 
 
         }
