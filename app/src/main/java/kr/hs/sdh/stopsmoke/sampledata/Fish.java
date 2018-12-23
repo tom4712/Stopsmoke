@@ -75,39 +75,43 @@ public class Fish extends AppCompatActivity {
                 Toast.makeText(Fish.this, year+"/"+(month+1)+"/"+dayOfMonth, Toast.LENGTH_SHORT).show();
 
 
-//                if(yyyy<=mYear) {
-//
-//                    if(yyyy==mYear){
-//                        if(Mmonth<mMonth){
-//                            nnn=""+mYear+mMonth+mDay;
-//                            Log.d("nnn",""+nnn);
+                if(yyyy<=mYear) {
+
+                    if(yyyy==mYear){
+                        if(Mmonth<mMonth){
+                            nnn=""+mYear+mMonth+mDay;
+                            Log.d("asaa",""+nnn);
+                            Toast.makeText(Fish.this,"선택달이클때",Toast.LENGTH_SHORT).show();
 //                            dbhelper.updatesdate(nnn);
-//                        }
-//
-//                        else if(Mmonth==mMonth){
-//                            if(day<mDay){
-//                                dbhelper.updatesdate(nnn);
-//                            }
-//                            else{
-//                                show();
-//                            }
-//                        }
-//
-//
-//                        else{
-//                            show();
-//                        }
-//                    }
-//                    Toast.makeText(Fish.this,"개꾸울",Toast.LENGTH_SHORT).show();
-//
-//                }
-//                else{
-//                    nnn=""+mYear+mMonth+mDay;
-//                    Log.d("nnn",""+nnn);
-//                    dbhelper.updatesdate(nnn);
-//
-//                    Toast.makeText(Fish.this,"먼지모름",Toast.LENGTH_SHORT).show();
-//                }
+                        }
+
+                        else if(Mmonth==mMonth){
+                            if(day<mDay){
+                                Log.d("asaa",""+nnn);
+                                nnn=""+mYear+mMonth+mDay;
+                                Toast.makeText(Fish.this,"달은 같고 데이데이",Toast.LENGTH_SHORT).show();
+                                dbhelper.updatesdate(nnn);
+                            }
+                            else{
+                                show();
+                            }
+                        }
+
+
+                        else{
+                            show();
+                        }
+                    }
+
+
+                }
+                else{
+                    nnn=""+mYear+mMonth+mDay;
+                    Log.d("nnn",""+nnn);
+                    dbhelper.updatesdate(nnn);
+
+                    Toast.makeText(Fish.this,"먼지모름",Toast.LENGTH_SHORT).show();
+                }
                 nnn=""+mYear+mMonth+mDay;
                 dbhelper.updateedate(nnn);
                 Log.d("nnn",""+nnn);
