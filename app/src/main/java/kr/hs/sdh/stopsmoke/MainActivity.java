@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Cursor all_cursor;
     int num = 40;
     private ArrayList<String> list = new ArrayList(num);
-
+    String b;
 
     int y,y2;
     int m,m2;
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         String a = String.valueOf(countdday(y,m,d));
-        String b = String.valueOf(cdountday2(y2,m2,d2));
+        b = String.valueOf(cdountday2(y2,m2,d2));
 
 
         afterdate = findViewById(R.id.futuer);
@@ -215,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
             return -1;
         }
     }//남은날자
-
     public int cdountday2(int year, int mmonth, int mday) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -244,7 +243,15 @@ public class MainActivity extends AppCompatActivity {
             return -1;
         }
 
-    }//전체 날자
+    }//경과
+    public void getmoney(){
+        String coin = list.get(3);
+        int sum = Integer.parseInt(coin);
+
+        int result = sum * Integer.parseInt(b);
+    }
+
+
 
     @Override
     protected void onStop() {
