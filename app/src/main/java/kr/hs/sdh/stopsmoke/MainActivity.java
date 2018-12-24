@@ -164,31 +164,25 @@ public class MainActivity extends AppCompatActivity {
     public void loadtext(){
         Cursul();
         sdate = findViewById(R.id.sdate);
-        Log.d("DB",""+list.get(0).substring(0,4)+"[]"+list.get(0).substring(4,6)+"[]"+list.get(0).substring(6));
+        Log.d("DB","ㅁㅁㅁㅁ"+list.get(2).substring(0,4)+"[]"+list.get(2).substring(4,6)+"[]"+list.get(2).substring(6));
         sdate.setText(list.get(0).substring(0,4)+"년"+list.get(0).substring(4,6)+"월"+list.get(0).substring(6)+"일 부터~");
-        y = Integer.parseInt(list.get(0).substring(0,4));
-        m = Integer.parseInt(list.get(0).substring(4,6));
-        try {
-            d = Integer.parseInt(list.get(0).substring(6, 7));
-        }catch (Exception e){
-            d = Integer.parseInt(list.get(0).substring(6));
-        }
+        y = Integer.parseInt(list.get(2).substring(0,4));
+        m = Integer.parseInt(list.get(2).substring(4,6));
+        d = Integer.parseInt(list.get(2).substring(6,8));
+        Log.d("테스트르를",""+y+"[]"+m+"[]"+d);
+        y2 = Integer.parseInt(list.get(0).substring(0,4));
+        m2 = Integer.parseInt(list.get(0).substring(4,6));
+        d2 = Integer.parseInt(list.get(0).substring(6,8));
 
-        y2 = Integer.parseInt(list.get(2).substring(0,4));
-        m2 = Integer.parseInt(list.get(2).substring(4,6));
-        try {
-            d2 = Integer.parseInt(list.get(2).substring(6, 7));
-        }catch (Exception e){
-            d2 = Integer.parseInt(list.get(2).substring(6));
-        }
 
-        int a = countdday(y,m,d);
-        int b = countdday2(y,m,d,y2,m2,d2);
+        String a = String.valueOf(countdday(y,m,d));
+        String b = String.valueOf(cdountday2(y2,m2,d2));
+
 
         afterdate = findViewById(R.id.futuer);
         nextdate = findViewById(R.id.paste);
-        nextdate.setText(""+a);//남은 날자
-        afterdate.setText(""+(a-b));//경과날자
+        nextdate.setText(""+b);//
+        afterdate.setText(""+a);//남은날자
 
         Log.d("db","남은날"+a);
     }
@@ -198,14 +192,15 @@ public class MainActivity extends AppCompatActivity {
 
             Calendar todaCal = Calendar.getInstance(); //오늘날자 가져오기ㅁㄴㅇㅁㄴㅇㅁ
             Calendar ddayCal = Calendar.getInstance(); //오늘날자를 가져와 변경시킴
-            Log.d("time","todaCal"+todaCal);
-            Log.d("time","todaCal"+ddayCal);
+            Log.d("timesss","todaCal"+todaCal);
+            Log.d("timesss","todaCal"+ddayCal);
 
-//            mmonth -= 1; // 받아온날자에서 -1을 해줘야함.
+            mmonth -= 1; // 받아온날자에서 -1을 해줘야함.
 
             ddayCal.set(year, mmonth, mday);// D-day의 날짜를 입력
-            Log.e("테스트", simpleDateFormat.format(todaCal.getTime()) + "");
-            Log.e("테스트", simpleDateFormat.format(ddayCal.getTime()) + "");
+            Log.d("테스트으응",""+year+"[]"+mmonth+"[]"+mday);
+            Log.d("테스트", simpleDateFormat.format(todaCal.getTime()) + "");
+            Log.d("테스트2", simpleDateFormat.format(ddayCal.getTime()) + "");
 
             long today = todaCal.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
             long dday = ddayCal.getTimeInMillis() / 86400000;
@@ -220,31 +215,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }//남은날자
 
-    public int countdday2(int year, int mmonth, int mday, int year2, int mmonth2, int mday2) {
+    public int cdountday2(int year, int mmonth, int mday) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-            Calendar todaCal = Calendar.getInstance(); //시작날자 가져오기ㅁㄴㅇㅁㄴㅇㅁ
-            Calendar ddayCal = Calendar.getInstance(); //오늘날자를 가져와 변경시킴
-            Log.d("time","todaCal"+todaCal);
-            Log.d("time","todaCal"+ddayCal);
+            Calendar startdayCal = Calendar.getInstance(); //시작날자
+            Calendar ddayCal = Calendar.getInstance(); //오늘날자 가져오기ㅁㄴㅇㅁㄴㅇㅁ
+            Log.d("timesss","todaCal"+startdayCal);
+            Log.d("timesss","todaCal"+ddayCal);
 
-            todaCal.set(year2, mmonth2, mday2);
-            ddayCal.set(year, mmonth, mday);// D-day의 날짜를 입력
-            Log.e("테스트", simpleDateFormat.format(todaCal.getTime()) + "");
-            Log.e("테스트", simpleDateFormat.format(ddayCal.getTime()) + "");
+            mmonth -= 1; // 받아온날자에서 -1을 해줘야함.
 
-            long today = todaCal.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
+            startdayCal.set(year, mmonth, mday);// D-day의 날짜를 입력
+            Log.d("테스트으응",""+year+"[]"+mmonth+"[]"+mday);
+            Log.d("테스트", simpleDateFormat.format(startdayCal.getTime()) + "");
+            Log.d("테스트2", simpleDateFormat.format(ddayCal.getTime()) + "");
+
+            long today = startdayCal.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
             long dday = ddayCal.getTimeInMillis() / 86400000;
             long count = dday - today; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
             num = (int) count * -1;
-            Log.d("테스트2","씨이ㅇ이이이발"+num);
+            Log.d("테스트","씨이ㅇ이이이발"+num);
 
-            return (int) count ;
+            return (int) count;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
+
     }//전체 날자
 
     @Override
