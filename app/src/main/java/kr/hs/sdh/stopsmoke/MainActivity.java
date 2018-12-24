@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         if(Integer.parseInt(list.get(1)) == 1) {
             loadtext();
         }
-        //
+
+
     }
 
 
