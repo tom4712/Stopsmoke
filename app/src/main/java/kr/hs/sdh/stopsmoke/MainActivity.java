@@ -1,11 +1,15 @@
 package kr.hs.sdh.stopsmoke;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +30,8 @@ import java.util.Date;
 
 import cn.trinea.android.view.autoscrollviewpager.AutoScrollViewPager;
 import kr.hs.sdh.stopsmoke.sampledata.Start;
+
+import static android.graphics.Color.argb;
 
 public class MainActivity extends AppCompatActivity {
     //버튼
@@ -72,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         //텍스트 지정
         if(Integer.parseInt(list.get(1)) == 1) {
             loadtext();
-        }
 
+        }
 
     }
 
@@ -114,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         /* 리스트뷰에 어댑터 등록 */
         mListView.setAdapter(mMyAdapter);
     }//리스트뷰
+
     public void DBcreate(){
             dbhelper = new DBhelper(getApplication());              Log.d("DB", "헬퍼불러옴");
         dbhelper.open();                                             Log.d("DB", "디비오픈");
@@ -244,11 +251,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }//경과
-    public void getmoney(){
-        String coin = list.get(3);
-        int sum = Integer.parseInt(coin);
 
-        int result = sum * Integer.parseInt(b);
+    public void getCoin(View view){
+        String num2 = list.get(3);
+        int sum = Integer.parseInt(num2);
+        int re = num*sum;
+
+        Log.d("ddasfsdfsadf", "getCoin:"+re);
+
+       final Context context = this;
+        view = this.getLayoutInflater().inflate(R.layout.dig, null);
+        TextView txtTitle = (TextView) view.findViewById(R.id.title);
+        txtTitle.setTextSize(30);
+        txtTitle.setTextColor(Color.BLACK);
+        txtTitle.setText("현재까지 절약한 돈!");
+// 내용 넣기
+        TextView message = (TextView) view.findViewById(R.id.message);
+        message.setTextSize(25);
+        txtTitle.setTextColor(Color.BLACK);
+        message.setText("현재까지 "+re+"원을 절약하셧습니다.");
+
+        AlertDialog.Builder alt = new AlertDialog.Builder(context);
+
+        alt.setView(view)
+                .setCancelable(false);
+
+        AlertDialog alert = alt.create();
+        alert.setCanceledOnTouchOutside(true);
+        alert.getWindow().setBackgroundDrawable(new ColorDrawable(argb(255,255,116,115)));
+
+        alert.show();
+
     }
 
 
@@ -258,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         dbhelper.close();
     } //앱종료
+
 
 
 }
