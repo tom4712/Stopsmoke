@@ -82,7 +82,7 @@ public class Fish extends AppCompatActivity {
                             nnn=""+mYear+mMonth+mDay;
                             Log.d("asaa",""+nnn);
                             Toast.makeText(Fish.this,"선택달이클때",Toast.LENGTH_SHORT).show();
-//                            dbhelper.updatesdate(nnn);
+                            dbhelper.updateedate(nnn);
                         }
 
                         else if(Mmonth==mMonth){
@@ -90,7 +90,7 @@ public class Fish extends AppCompatActivity {
                                 Log.d("asaa",""+nnn);
                                 nnn=""+mYear+mMonth+mDay;
                                 Toast.makeText(Fish.this,"달은 같고 데이데이",Toast.LENGTH_SHORT).show();
-                                dbhelper.updatesdate(nnn);
+                                dbhelper.updateedate(nnn);
                             }
                             else{
                                 show();
@@ -108,7 +108,7 @@ public class Fish extends AppCompatActivity {
                 else{
                     nnn=""+mYear+mMonth+mDay;
                     Log.d("nnn",""+nnn);
-                    dbhelper.updatesdate(nnn);
+                    dbhelper.updateedate(nnn);
 
                     Toast.makeText(Fish.this,"먼지모름",Toast.LENGTH_SHORT).show();
                 }

@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             long today = startdayCal.getTimeInMillis() / 86400000; //->(24 * 60 * 60 * 1000) 24시간 60분 60초 * (ms초->초 변환 1000)
             long dday = ddayCal.getTimeInMillis() / 86400000;
             long count = dday - today; // 오늘 날짜에서 dday 날짜를 빼주게 됩니다.
-            num = (int) count * -1;
+            num = (int) count * 1;
             Log.d("테스트","씨이ㅇ이이이발"+num);
 
             return (int) count;
